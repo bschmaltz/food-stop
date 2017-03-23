@@ -280,12 +280,14 @@ function getBusinessesNearStops(stopModels, cb) {
         service.nearbySearch(request, searchCallback);
     }
     function searchCallback(searchResult) {
-        searchResult.forEach(business => {
-            if(!businessIds.has(business.id)) {
-                businesses.push(business);
-                businessIds.add(business.id);
-            }
-        })
+        if(searchResult!==null) {
+            searchResult.forEach(business => {
+                if(!businessIds.has(business.id)) {
+                    businesses.push(business);
+                    businessIds.add(business.id);
+                }
+            })
+        }
         resolveCount++;
         if(resolveCount === stopModels.length) {
             cb(businesses);
